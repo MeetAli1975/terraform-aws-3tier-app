@@ -32,6 +32,9 @@ cat > /var/www/html/index.html << 'EOF'
 </html>
 EOF
 
+# Configure Apache to listen on port 8080
+sed -i 's/^Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
+
 # Start Apache
 systemctl start httpd
 systemctl enable httpd
