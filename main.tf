@@ -273,6 +273,7 @@ resource "aws_instance" "web" {
   iam_instance_profile = aws_iam_instance_profile.ec2.name
 
   user_data = base64encode(templatefile("${path.module}/user_data.sh", {
+    environment = var.environment
     db_host = aws_db_instance.main.address
     db_name = var.db_name
     db_user = var.db_username
@@ -317,7 +318,7 @@ resource "aws_db_instance" "main" {
   vpc_security_group_ids = [aws_security_group.rds.id]
   skip_final_snapshot   = var.environment != "prod"
   multi_az              = var.environment == "prod"
-  backup_retention_period = var.environment == "prod" ? 30 : 7
+  backup_retention_period = var.environment == "prod" ? 30 : 0
 
   tags = {
     Name = "${var.project_name}-db-${var.environment}"

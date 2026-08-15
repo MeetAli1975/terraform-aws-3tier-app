@@ -60,7 +60,7 @@ variable "db_allocated_storage" {
 variable "db_engine_version" {
   description = "MySQL engine version"
   type        = string
-  default     = "8.0.35"
+  default     = "5.7"
 }
 
 variable "db_name" {
